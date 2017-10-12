@@ -12,3 +12,7 @@ class ImageItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     imageurl = scrapy.Field()
+
+
+class ZhihuQuestionItem(scrapy.Item):
+     name=scrapy.Field()

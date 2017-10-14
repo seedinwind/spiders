@@ -21,22 +21,17 @@ class ReniaoSpider(scrapy.Spider):
     def __check_login_status(self, response):
         # print(response.body.decode('gbk'))
         urls = [
-            "http://www.53reniao.com/forum-35-51.html",
-            "http://www.53reniao.com/forum-35-52.html",
-            "http://www.53reniao.com/forum-35-53.html",
-            "http://www.53reniao.com/forum-35-54.html",
-            "http://www.53reniao.com/forum-35-55.html",
         ]
         for url in urls:
             yield scrapy.Request(url, callback=self.parse)
 
     def parse(self, response):
-        base_url = 'http://www.53reniao.com/'
-        if response.url.startswith('http://www.53reniao.com/forum'):
+        base_url = 'http://www.o.com/'
+        if response.url.startswith('http:/o.com/forum'):
             details = response.xpath("//a[@class='xst']/@href").extract()
             for d in details:
                 new_url = base_url + d
-                if not new_url.startswith("http://www.53reniao.com/forum"):
+                if not new_url.startswith("http://o.com/forum"):
                     yield scrapy.Request(new_url, callback=self.parse, dont_filter=True)
         else:
             title = response.xpath("//head/title").extract()

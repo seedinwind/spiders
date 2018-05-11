@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
+from helloscrapy.items import PoemAuther
 
 
 class PoemSpider(scrapy.Spider):
@@ -17,29 +18,41 @@ class PoemSpider(scrapy.Spider):
     def parse(self, response):
         base_url = 'https://so.gushiwen.org'
         base_auther_url='https://so.gushiwen.org/authors/'
-        if (response.url==base_auther_url) |response.url.startswith('https://so.gushiwen.org/authors/Default'):
+        if (response.url==base_auther_url) |response.url.startswith('https://so.gushiwen.org/authors/default'):
             #作者列表
             list=response.xpath("//div[@class='main3']/div[@class='left']/div[@class='sonspic']/div[@class='cont']")
-            name=list[0].xpath("//p[1]/a[1]/b/text()").extract()
-            desc=list[0].xpath("//p[2]/text()").extract()
-            poemlist=list[0].xpath("//p[2]/a/@href").extract()
-            next=response.xpath("//div[@class='main3']/div[@class='left']/div[@class='pages']/a[last()]/@href").extract()
-            # yield scrapy.Request(base_auther_url+next[0], callback=self.parse, dont_filter=True)
+            name=list.xpath(".//p[1]/a[1]/b/text()").extract()
+            desc=list.xpath(".//p[2]/text()").extract()
+            poemlist=list.xpath(".//p[2]/a/@href").extract()
+            next=response.xpath("//div[@class='main3']/div[@class='left']/form/div/a[1]/@href").extract()
+            yield scrapy.Request(base_url+next[0], callback=self.parse, dont_filter=True)
             #保存作者信息
-
+            for n in range(0 ,len(name)-1):
+                item=PoemAuther()
+                item['name']=name[n]
+                item['desc']=desc[n]
+                yield item
             for poem in poemlist:
                 yield scrapy.Request(base_url + poem, callback=self.parse, dont_filter=True)
 
         elif response.url.startswith('https://so.gushiwen.org/authors/authorvsw'):
+
+             print("----------------"+response.url+"----------------------")
              #作品列表
-             plist = response.xpath("//div[@class='main3']/div[@class='left']/div[@class='sons']/div[@class='cont']")
-             title = plist[0].xpath("//p[1]/a[1]/b/text()").extract()
-             time = plist[0].xpath("//p[2]/a[1]/text()").extract()
-             poemist = plist[0].xpath("//p[2]/a[2]/text()").extract()
-             content = plist[0].xpath("//div[2]/text()").extract()
-             print(content)
-             # print(title)
-
-
-
+             list = response.xpath("//div[@class='main3']/div[@class='left']/div[@class='sons']/div[@class='cont']")
+             title = list.xpath(".//p[1]/a[1]/b/text()").extract()
+             time = list.xpath(".//p[2]/a[1]/text()").extract()
+             poemist = list.xpath(".//p[2]/a[2]/text()").extract()
+             content = list.xpath(".//div[@class='contson']")
+             #拼接正文内容
+             contentlist=[]
+             for i in range(0,len(content)-1):
+                lines=content[i].xpath(".//p/text()|.//text()").extract()
+                concat=""
+                for l in lines:
+                    concat+=l
+                contentlist.append(concat)
+                print(title[i])
+                print(time[i]+"  "+poemist[i])
+                print(concat)
 

@@ -16,3 +16,11 @@ class ImageItem(scrapy.Item):
 
 class ZhihuQuestionItem(scrapy.Item):
      name=scrapy.Field()
+
+class PoemAuther(scrapy.Item):
+     name = scrapy.Field()
+     desc = scrapy.Field()
+
+class PoemInfo(scrapy.Item):
+     name = scrapy.Field()
+     desc = scrapy.Field()

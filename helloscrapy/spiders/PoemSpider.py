@@ -6,7 +6,7 @@ from helloscrapy.items import PoemAuther
 
 class PoemSpider(scrapy.Spider):
     name = 'poem'
-    allowed_domains = ['www.53reniao.com']
+    allowed_domains = ['so.gushiwen.org']
     start_urls = [
         'https://so.gushiwen.org/authors/',
         # 'https://so.gushiwen.org/authors/authorvsw_1abe13750637A1.aspx',
@@ -51,8 +51,8 @@ class PoemSpider(scrapy.Spider):
                 concat=""
                 for l in lines:
                     concat+=l
-                contentlist.append(concat)
+                contentlist.append(concat.strip())
                 print(title[i])
                 print(time[i]+"  "+poemist[i])
-                print(concat)
+                print(concat.strip())
 

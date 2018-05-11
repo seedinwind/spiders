@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47c34df1-e4fe-45ca-94fe-10ee12e782c3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helloscrapy/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/helloscrapy/items.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/helloscrapy/spiders/PoemSpider.py" beforeDir="false" afterPath="$PROJECT_DIR$/helloscrapy/spiders/PoemSpider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -18,8 +16,8 @@
       <file leaf-file-name="PoemSpider.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/helloscrapy/spiders/PoemSpider.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="56" column="29" selection-start-line="54" selection-start-column="14" selection-end-line="56" selection-end-column="29" />
+            <state relative-caret-position="405">
+              <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-end-line="55" />
               <folding>
                 <element signature="e#25#38#0" expanded="true" />
               </folding>
@@ -248,6 +246,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="75" y="34" width="1855" height="1004" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14231189" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -256,7 +255,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.8961187" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27968037" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -609,8 +608,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/helloscrapy/spiders/PoemSpider.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="56" column="29" selection-start-line="54" selection-start-column="14" selection-end-line="56" selection-end-column="29" />
+        <state relative-caret-position="405">
+          <caret line="54" column="31" lean-forward="true" selection-start-line="54" selection-end-line="55" />
           <folding>
             <element signature="e#25#38#0" expanded="true" />
           </folding>

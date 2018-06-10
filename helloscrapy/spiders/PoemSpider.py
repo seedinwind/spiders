@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import scrapy
-from helloscrapy.items import PoemAuther
+from helloscrapy.items import PoemAuther,PoemInfo
 
 
 class PoemSpider(scrapy.Spider):
@@ -24,8 +24,6 @@ class PoemSpider(scrapy.Spider):
             name=list.xpath(".//p[1]/a[1]/b/text()").extract()
             desc=list.xpath(".//p[2]/text()").extract()
             poemlist=list.xpath(".//p[2]/a/@href").extract()
-            next=response.xpath("//div[@class='main3']/div[@class='left']/form/div/a[1]/@href").extract()
-            yield scrapy.Request(base_url+next[0], callback=self.parse, dont_filter=True)
             #保存作者信息
             for n in range(0 ,len(name)-1):
                 item=PoemAuther()
@@ -34,16 +32,18 @@ class PoemSpider(scrapy.Spider):
                 yield item
             for poem in poemlist:
                 yield scrapy.Request(base_url + poem, callback=self.parse, dont_filter=True)
-
+            # 下一页
+            next = response.xpath("//div[@class='main3']/div[@class='left']/form/div/a[1]/@href").extract()
+            if len(next):
+               yield scrapy.Request(base_url + next[0], callback=self.parse, dont_filter=True)
         elif response.url.startswith('https://so.gushiwen.org/authors/authorvsw'):
-
-             print("----------------"+response.url+"----------------------")
              #作品列表
              list = response.xpath("//div[@class='main3']/div[@class='left']/div[@class='sons']/div[@class='cont']")
              title = list.xpath(".//p[1]/a[1]/b/text()").extract()
              time = list.xpath(".//p[2]/a[1]/text()").extract()
              poemist = list.xpath(".//p[2]/a[2]/text()").extract()
              content = list.xpath(".//div[@class='contson']")
+
              #拼接正文内容
              contentlist=[]
              for i in range(0,len(content)-1):
@@ -52,7 +52,14 @@ class PoemSpider(scrapy.Spider):
                 for l in lines:
                     concat+=l
                 contentlist.append(concat.strip())
-                print(title[i])
-                print(time[i]+"  "+poemist[i])
-                print(concat.strip())
-
+                #诗文信息
+                info=PoemInfo()
+                info['title'] = title[i]
+                info['time'] = time[i]
+                info['author'] = poemist[i]
+                info['content'] = concat.strip()
+                yield info
+             #下一页
+             next=response.xpath("//div[@class='main3']/div[@class='left']/form/div/a[1]/@href").extract()
+             if len(next):
+                yield scrapy.Request(base_url + next[0], callback=self.parse, dont_filter=True)

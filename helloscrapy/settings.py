@@ -14,6 +14,13 @@ BOT_NAME = 'helloscrapy'
 SPIDER_MODULES = ['helloscrapy.spiders']
 NEWSPIDER_MODULE = 'helloscrapy.spiders'
 
+MONGO_HOST = "127.0.0.1"
+MONGO_PORT = 27017
+MONGO_DB = "poem"
+COL_AUTHOR ="author"
+COL_CONTENT ="poems"
+
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'helloscrapy (+http://www.yourdomain.com)'
 
@@ -66,7 +73,8 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'helloscrapy.pipelines.HelloscrapyPipeline': 300,
-    # 'helloscrapy.pipelines.DownloadImagePipeline': 10
+    # 'helloscrapy.pipelines.DownloadImagePipeline': 10,
+    'helloscrapy.pipelines.PoemPipline':300,
 }
 
 IMAGES_STORE = '/Users/seedinwind/Downloads/spiderimg'

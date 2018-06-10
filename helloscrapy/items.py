@@ -22,5 +22,7 @@ class PoemAuther(scrapy.Item):
      desc = scrapy.Field()
 
 class PoemInfo(scrapy.Item):
-     name = scrapy.Field()
-     desc = scrapy.Field()
+     title = scrapy.Field()
+     time = scrapy.Field()
+     author = scrapy.Field()
+     content = scrapy.Field()

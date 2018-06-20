@@ -31,12 +31,15 @@ class PoemSpider(scrapy.Spider):
                 item['desc']=desc[n]
                 yield item
             for poem in poemlist:
-                yield scrapy.Request(base_url + poem, callback=self.parse, dont_filter=True)
+                yield scrapy.Request(base_url + poem, callback=self.parse, dont_filter=False)
             # 下一页
             next = response.xpath("//div[@class='main3']/div[@class='left']/form/div/a[1]/@href").extract()
             if len(next):
-               yield scrapy.Request(base_url + next[0], callback=self.parse, dont_filter=True)
+               yield scrapy.Request(base_url + next[0], callback=self.parse, dont_filter=False)
         elif response.url.startswith('https://so.gushiwen.org/authors/authorvsw'):
+
+             print("----------------"+response.url+"----------------------")
+
              #作品列表
              list = response.xpath("//div[@class='main3']/div[@class='left']/div[@class='sons']/div[@class='cont']")
              title = list.xpath(".//p[1]/a[1]/b/text()").extract()
@@ -58,8 +61,11 @@ class PoemSpider(scrapy.Spider):
                 info['time'] = time[i]
                 info['author'] = poemist[i]
                 info['content'] = concat.strip()
+                print(title[i])
+                print(poemist[i])
+                print(concat.strip())
                 yield info
              #下一页
              next=response.xpath("//div[@class='main3']/div[@class='left']/form/div/a[1]/@href").extract()
              if len(next):
-                yield scrapy.Request(base_url + next[0], callback=self.parse, dont_filter=True)
+                yield scrapy.Request(base_url + next[0], callback=self.parse, dont_filter=False)

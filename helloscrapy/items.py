@@ -26,3 +26,4 @@ class PoemInfo(scrapy.Item):
      time = scrapy.Field()
      author = scrapy.Field()
      content = scrapy.Field()
+     md5 =scrapy.Field()

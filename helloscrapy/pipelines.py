@@ -8,6 +8,7 @@
 from scrapy import Request
 import urllib
 import pymongo
+import hashlib
 from scrapy.conf import settings
 from helloscrapy.items import PoemAuther,PoemInfo
 
@@ -35,9 +36,15 @@ class PoemPipline(object):
         self.db = self.client[settings['MONGO_DB']]  # 获得数据库的句柄
         self.coll_author = self.db[settings['COL_AUTHOR']]  # 获得collection的句柄
         self.coll_content = self.db[settings['COL_CONTENT']]  # 获得collection的句柄
+        self.temp = dict()
     def process_item(self,item,spider):
         poem = dict(item)  # 把item转化成字典形式
         if isinstance(item,PoemAuther):
            self.coll_author.insert(poem)  # 向数据库插入一条记录
         elif isinstance(item,PoemInfo):
-            self.coll_content.insert(poem)  # 向数据库插入一条记录
+            md5= hashlib.md5(item["content"].encode('utf-8').strip()).hexdigest()
+            if self.temp.has_key(md5):
+               print("已存在")
+            else:
+               self.temp[md5] = md5
+               self.coll_content.insert(poem)  # 向数据库插入一条记录

@@ -21,6 +21,9 @@ COL_AUTHOR ="author"
 COL_CONTENT ="poems"
 
 
+MONGO_DB_GAOSENG = "gaosheng"
+COL_GAOSENG ="desc"
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'helloscrapy (+http://www.yourdomain.com)'
 
@@ -74,7 +77,8 @@ DEFAULT_REQUEST_HEADERS = {
 ITEM_PIPELINES = {
     # 'helloscrapy.pipelines.HelloscrapyPipeline': 300,
     # 'helloscrapy.pipelines.DownloadImagePipeline': 10,
-    'helloscrapy.pipelines.PoemPipline':300,
+    # 'helloscrapy.pipelines.PoemPipline':300,
+    'helloscrapy.pipelines.GaosengPipline':300,
 }
 
 IMAGES_STORE = '/Users/seedinwind/Downloads/spiderimg'

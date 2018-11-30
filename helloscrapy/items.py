@@ -27,3 +27,7 @@ class PoemInfo(scrapy.Item):
      author = scrapy.Field()
      content = scrapy.Field()
      md5 =scrapy.Field()
+
+class Gaoseng(scrapy.Item):
+     title = scrapy.Field()
+     content = scrapy.Field()

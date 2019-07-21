@@ -31,3 +31,13 @@ class PoemInfo(scrapy.Item):
 class Gaoseng(scrapy.Item):
      title = scrapy.Field()
      content = scrapy.Field()
+
+
+class Dzj(scrapy.Item):
+      buming=scrapy.Field()
+      jingti=scrapy.Field()
+      pinming = scrapy.Field()
+      content = scrapy.Field()
+      yizhe = scrapy.Field()
+      pinhao = scrapy.Field() #经文品编号  卷内编号
+      juanhao = scrapy.Field() #经文卷编号

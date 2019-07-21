@@ -10,7 +10,7 @@ import urllib
 import pymongo
 import hashlib
 from scrapy.conf import settings
-from helloscrapy.items import PoemAuther,PoemInfo,Gaoseng
+from helloscrapy.items import PoemAuther,PoemInfo,Gaoseng,Dzj
 
 
 class HelloscrapyPipeline(object):
@@ -61,3 +61,18 @@ class GaosengPipline(object):
         poem = dict(item)  # 把item转化成字典形式
         if isinstance(item,Gaoseng):
            self.coll_author.insert(poem)  # 向数据库插入一条记录
+
+
+class DzjPipline(object):
+    def __init__(self):
+        print("-----init-----")
+        # # 链接数据库
+        self.client = pymongo.MongoClient(host=settings['MONGO_HOST'], port=settings['MONGO_PORT'])
+        # 数据库登录需要帐号密码的话
+        # self.client.admin.authenticate(settings['MINGO_USER'], settings['MONGO_PSW'])
+        self.db = self.client[settings['MONGO_DB_DZJ']]  # 获得数据库的句柄
+        self.coll_dzj = self.db[settings['COL_DZJ']]  # 获得collection的句柄
+    def process_item(self,item,spider):
+        dzj = dict(item)  # 把item转化成字典形式
+        if isinstance(item,Dzj):
+           self.coll_dzj.insert(dzj)  # 向数据库插入一条记录

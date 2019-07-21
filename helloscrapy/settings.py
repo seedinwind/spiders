@@ -16,19 +16,23 @@ NEWSPIDER_MODULE = 'helloscrapy.spiders'
 
 MONGO_HOST = "127.0.0.1"
 MONGO_PORT = 27017
-MONGO_DB = "poem"
-COL_AUTHOR ="author"
-COL_CONTENT ="poems"
+# MONGO_DB = "poem"
+# COL_AUTHOR ="author"
+# COL_CONTENT ="poems"
+#
+#
+# MONGO_DB_GAOSENG = "gaosheng"
+# COL_GAOSENG ="desc"
 
 
-MONGO_DB_GAOSENG = "gaosheng"
-COL_GAOSENG ="desc"
+MONGO_DB_DZJ = "dzj"
+COL_DZJ = "qldzj"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'helloscrapy (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -78,7 +82,8 @@ ITEM_PIPELINES = {
     # 'helloscrapy.pipelines.HelloscrapyPipeline': 300,
     # 'helloscrapy.pipelines.DownloadImagePipeline': 10,
     # 'helloscrapy.pipelines.PoemPipline':300,
-    'helloscrapy.pipelines.GaosengPipline':300,
+    # 'helloscrapy.pipelines.GaosengPipline':300,
+      'helloscrapy.pipelines.DzjPipline':300,
 }
 
 IMAGES_STORE = '/Users/seedinwind/Downloads/spiderimg'

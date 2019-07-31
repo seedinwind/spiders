@@ -119,7 +119,7 @@ class dzjSpider(scrapy.Spider):
                 elif folling[n].extract().startswith('<p>'):
                     jwlist = folling[n].xpath("./text()").extract()
                     for n in range(0, len(jwlist)):
-                        jw += jwlist[n].replace("\u3000\u3000", "")
+                        jw += jwlist[n].replace("\u3000\u3000", "")+"\r\n"
             info = Dzj()
             info['jingti'] = getjinti(jingti)
             info['juanhao'] = getjuanhao(jingti)
